@@ -22,7 +22,7 @@ class SecondViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let contentSize = CGSize(width: view.frame.width + 100, height:view.frame.height)
+        let contentSize = CGSize(width: view.frame.width + 100, height:view.frame.height + 100)
         textView.makeNote()
         
         view.addSubview(scrollView)
@@ -31,6 +31,8 @@ class SecondViewController: UIViewController {
         contentView.addSubview(topView)
         contentView.addSubview(textView)
         contentView.addSubview(bottomView)
+        
+        scrollView.frame = view.bounds
         
         scrollView.contentSize = contentSize
         contentView.frame.size = contentSize
@@ -58,11 +60,11 @@ class SecondViewController: UIViewController {
 
     func makeConstraintsContentView() {
                 contentView.snp.makeConstraints { make in
-            make.right.equalTo(scrollView.contentLayoutGuide.snp.right)
+                    make.right.equalTo(scrollView.safeAreaLayoutGuide.snp.right)
 
-                    make.left.equalTo(scrollView.contentLayoutGuide.snp.left)
-            make.top.equalTo(scrollView.contentLayoutGuide.snp.top)
-            make.bottom.equalTo(scrollView.contentLayoutGuide.snp.bottom)
+                    make.left.equalTo(scrollView.safeAreaLayoutGuide.snp.left)
+            make.top.equalTo(scrollView.safeAreaLayoutGuide.snp.top)
+            make.bottom.equalTo(scrollView.safeAreaLayoutGuide.snp.bottom)
             
         }
     }
@@ -70,9 +72,9 @@ class SecondViewController: UIViewController {
     func makeConstraintsTopView () {
         
     topView.snp.makeConstraints { make in
-        make.top.equalTo(contentView.snp.top)
-        make.left.equalTo(contentView.snp.left)
-        make.right.equalTo(contentView.snp.right)
+        make.top.equalTo(contentView.snp.top).inset(5)
+        make.left.equalTo(contentView.snp.left).inset(5)
+        make.right.equalTo(contentView.snp.right).inset(5)
         make.bottom.equalTo(textView.snp.top).inset(-10)
 
     }
@@ -81,9 +83,9 @@ class SecondViewController: UIViewController {
     func  makeConstraintsTextView() {
         
         textView.snp.makeConstraints { make in
-            make.left.equalTo(scrollView.frameLayoutGuide.snp.left).inset(5)
-            make.right.equalTo(scrollView.frameLayoutGuide.snp.right).inset(5)
-            make.height.equalTo(scrollView.frameLayoutGuide.snp.height).multipliedBy(0.7)
+            make.left.equalTo(contentView.snp.left).inset(5)
+            make.right.equalTo(contentView.snp.right).inset(5)
+            make.height.equalTo(contentView.snp.height).multipliedBy(0.7)
     
         }
     }
@@ -92,9 +94,9 @@ class SecondViewController: UIViewController {
         
         bottomView.snp.makeConstraints { make in
             make.top.equalTo(textView.snp.bottom).inset(-10)
-            make.left.equalTo(scrollView.frameLayoutGuide.snp.left).inset(5)
-            make.right.equalTo(scrollView.frameLayoutGuide.snp.right).inset(5)
-            make.bottom.equalTo(scrollView.frameLayoutGuide.snp.bottom).inset(10)
+            make.left.equalTo(contentView.snp.left).inset(5)
+            make.right.equalTo(contentView.snp.right).inset(5)
+            make.bottom.equalTo(contentView.snp.bottom).inset(10)
             make.height.equalTo(contentView.snp.height).multipliedBy(0.1)
         }
     }

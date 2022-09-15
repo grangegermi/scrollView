@@ -112,12 +112,19 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITextFieldDelegat
         }
 }
     
-   func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-       self.textField1.becomeFirstResponder()
-      NotificationCenter.default.addObserver(forName: UIResponder.keyboardDidShowNotification, object: nil, queue: .main) { notification in
-
-      }
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+//       self.textField1.becomeFirstResponder()
+            if scroll.contentSize.height > view.bounds.height {
+                scroll.contentSize.height = view.frame.origin.y
+            self.textField1.becomeFirstResponder()
+        }
+        }
+//            self.textField1.becomeFirstResponder()
+        }
+//      NotificationCenter.default.addObserver(forName: UIResponder.keyboardDidShowNotification, object: nil, queue: .main) { notification in
+//
+//      }
    
-    }
     
-}
+    
+//}
